@@ -2,6 +2,9 @@ package com.techiteasy.techiteasy.controllers;
 
 import com.techiteasy.techiteasy.exceptions.RecordIsEmptyException;
 import com.techiteasy.techiteasy.exceptions.RecordNotFoundException;
+import com.techiteasy.techiteasy.model.Television;
+import com.techiteasy.techiteasy.repository.TelevisionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +25,19 @@ public class TelevisionsController {
       televisions.add("Television Four");
       televisions.add("Television Five");
    }
-   
+
+   @Autowired
+   private TelevisionRepository televisionRepository;
+
    // CREATE
    @PostMapping("/televisions")
-   public ResponseEntity<Object> addTelevision(@RequestBody String name) {
-   
-      if (!name.isEmpty()) {
+   public ResponseEntity<Object> addTelevision(@RequestBody Television television) {
+
+      if (television != null) {
          // add one item
-         televisions.add(name);
+         televisionRepository.save(television);
          URI location = URI.create("/televisions");
-         return ResponseEntity.created(location).body(name);
+         return ResponseEntity.created(location).body(television);
       } else {
          throw new RecordIsEmptyException("Body is empty");
       }
@@ -42,17 +48,17 @@ public class TelevisionsController {
    @GetMapping("/televisions")
    public ResponseEntity<Object> getAllTelevisions() {
       // get all items
-      return ResponseEntity.ok(televisions);
+      return ResponseEntity.ok(televisionRepository.findAll()); // Jackson package - object => json
    }
    
    @GetMapping("/televisions/{id}")
-   public ResponseEntity<Object> getTelevision(@PathVariable int id) {
-      
-      if (id < televisions.size()) {
-         // get one item by id
-         return ResponseEntity.ok(televisions.get(id));
-      } else {
+   public ResponseEntity<Object> getTelevision(@PathVariable long id) {
+
+      if (!televisionRepository.existsById(id)) {
          throw new RecordNotFoundException("ID does not exist!");
+      } else {
+         // get one item by id
+         return ResponseEntity.ok(televisionRepository.findById(id)); // Jackson package - object => json
       }
    }
    

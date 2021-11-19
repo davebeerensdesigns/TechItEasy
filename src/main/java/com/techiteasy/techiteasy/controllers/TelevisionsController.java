@@ -16,17 +16,6 @@ import java.util.Optional;
 
 @RestController
 public class TelevisionsController {
-   
-   private final List<String> televisions;
-   
-   public TelevisionsController() {
-      this.televisions = new ArrayList<>();
-      televisions.add("Television One");
-      televisions.add("Television Two");
-      televisions.add("Television Three");
-      televisions.add("Television Four");
-      televisions.add("Television Five");
-   }
 
    @Autowired
    private TelevisionRepository televisionRepository;
@@ -46,7 +35,7 @@ public class TelevisionsController {
    }
 
    
-   // READ
+   // GET
    @GetMapping("/televisions")
    public ResponseEntity<Object> getAllTelevisions() {
       // get all items
@@ -65,7 +54,7 @@ public class TelevisionsController {
    }
 
 
-   //UPDATE
+   // UPDATE
    @PutMapping("/televisions/{id}")
    public ResponseEntity<Object> updateTelevision(@PathVariable long id, @RequestBody Television television) {
       if (!televisionRepository.existsById(id)) {
@@ -81,7 +70,7 @@ public class TelevisionsController {
       }
    }
 
-   //PATCH
+   // PATCH
    @PatchMapping("/televisions/{id}")
    public ResponseEntity<Object> patchTelevision(@PathVariable long id, @RequestBody Television television) {
       if (!televisionRepository.existsById(id)) {

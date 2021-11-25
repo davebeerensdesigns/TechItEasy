@@ -1,5 +1,6 @@
 package com.techiteasy.techiteasy.controllers;
 
+import com.techiteasy.techiteasy.Dtos.TelevisionDto;
 import com.techiteasy.techiteasy.model.Television;
 import com.techiteasy.techiteasy.services.TelevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class TelevisionsController {
     * @return void
     */
    @PostMapping(value = "/televisions")
-   public ResponseEntity<Object> addTelevision(@RequestBody Television television){
+   public ResponseEntity<Object> addTelevision(@RequestBody TelevisionDto television){
       long newId = televisionService.addTelevision(television);
 
       URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newId).toUri();

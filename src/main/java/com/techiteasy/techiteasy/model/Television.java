@@ -1,6 +1,9 @@
 package com.techiteasy.techiteasy.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "televisions")
@@ -10,21 +13,54 @@ public class Television {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     private String type;
+
+    @NotNull
     private String brand;
+
+    @NotNull
     private String name;
+
+    @NotNull
+    @Min(value = 1)
+    @Max(value = 10000)
     private Double price;
+
+    @NotNull
     private Double availableSize;
+
+    @NotNull
     private Double refreshRate;
+
+    @NotNull
     private String screenType;
+
+    @NotNull
     private String screenQuality;
+
+    @NotNull
     private Boolean smartTv;
+
+    @NotNull
     private Boolean wifi;
+
+    @NotNull
     private Boolean voiceControl;
+
+    @NotNull
     private Boolean hdr;
+
+    @NotNull
     private Boolean bluetooth;
+
+    @NotNull
     private Boolean ambiLight;
+
+    @NotNull
     private Integer originalStock;
+
+    @NotNull
     private Integer sold;
 
     public Television() {

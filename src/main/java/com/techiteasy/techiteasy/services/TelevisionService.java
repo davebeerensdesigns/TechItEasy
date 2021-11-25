@@ -1,5 +1,6 @@
 package com.techiteasy.techiteasy.services;
 
+import com.techiteasy.techiteasy.Dtos.TelevisionDto;
 import com.techiteasy.techiteasy.exceptions.RecordNotFoundException;
 import com.techiteasy.techiteasy.model.Television;
 import com.techiteasy.techiteasy.repository.TelevisionRepository;
@@ -33,8 +34,29 @@ public class TelevisionService {
         }
     }
 
-    public long addTelevision(Television television){
+    public long addTelevision(TelevisionDto televisionDto){
+
+        Television television = new Television();
+
+        television.setType(televisionDto.type);
+        television.setBrand(televisionDto.brand);
+        television.setName(televisionDto.name);
+        television.setPrice(televisionDto.price);
+        television.setAvailableSize(televisionDto.availableSize);
+        television.setRefreshRate(televisionDto.refreshRate);
+        television.setScreenType(televisionDto.screenType);
+        television.setScreenQuality(televisionDto.screenQuality);
+        television.setSmartTv(televisionDto.smartTv);
+        television.setWifi(televisionDto.wifi);
+        television.setVoiceControl(televisionDto.voiceControl);
+        television.setHdr(televisionDto.hdr);
+        television.setBluetooth(televisionDto.bluetooth);
+        television.setAmbiLight(televisionDto.ambiLight);
+        television.setOriginalStock(televisionDto.originalStock);
+        television.setSold(televisionDto.sold);
+
         Television newTelevision = televisionRepository.save(television);
+
         return newTelevision.getId();
     }
 

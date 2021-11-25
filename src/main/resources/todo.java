@@ -1,8 +1,5 @@
 
 
-// TODO: Maak in de TelevisionService de functie getTelevisions aan de hand van het voorbeeld in hoofdstuk 6.2 van de cursus Spring Boot cursus in Edhub
-// TODO: Doe dit ook voor de getTelevision, saveTelevision, updateTelevision en de deleteTelevision
-// TODO: Maak in de TelevisionController een @Autowired om de Service te kunnen gebruiken in de Controller
 // TODO: Maak in het project een map aan genaamd Dtos
 // TODO: Maak in deze map een klasse aan genaamd TelevisionDto
 // TODO: Defenieer in deze klasse alle variabele die een Television object bevat (dezelfde als in het model gedefinieerd staan)

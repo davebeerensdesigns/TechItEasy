@@ -1,6 +1,5 @@
 package com.techiteasy.techiteasy.controllers;
 
-import com.techiteasy.techiteasy.exceptions.RecordIsEmptyException;
 import com.techiteasy.techiteasy.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +13,5 @@ public class ExceptionController {
    public ResponseEntity<Object> exception(RecordNotFoundException exception) {
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
    }
-   
-   
-   @ExceptionHandler(value = RecordIsEmptyException.class)
-   public ResponseEntity<Object> exception(RecordIsEmptyException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-   }
+
 }

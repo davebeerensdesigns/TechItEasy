@@ -1,9 +1,6 @@
 package com.techiteasy.techiteasy.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "televisions")
@@ -13,78 +10,22 @@ public class Television {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     private String type;
-
-    @NotNull
     private String brand;
-
-    @NotNull
     private String name;
-
-    @NotNull
-    @Min(value = 1)
-    @Max(value = 10000)
     private Double price;
-
-    @NotNull
     private Double availableSize;
-
-    @NotNull
     private Double refreshRate;
-
-    @NotNull
     private String screenType;
-
-    @NotNull
     private String screenQuality;
-
-    @NotNull
     private Boolean smartTv;
-
-    @NotNull
     private Boolean wifi;
-
-    @NotNull
     private Boolean voiceControl;
-
-    @NotNull
     private Boolean hdr;
-
-    @NotNull
     private Boolean bluetooth;
-
-    @NotNull
     private Boolean ambiLight;
-
-    @NotNull
     private Integer originalStock;
-
-    @NotNull
     private Integer sold;
-
-    public Television() {
-    }
-
-    public Television(long id, String type, String brand, String name, Double price, Double availableSize, Double refreshRate, String screenType, String screenQuality, Boolean smartTv, Boolean wifi, Boolean voiceControl, Boolean hdr, Boolean bluetooth, Boolean ambiLight, Integer originalStock, Integer sold) {
-        this.id = id;
-        this.type = type;
-        this.brand = brand;
-        this.name = name;
-        this.price = price;
-        this.availableSize = availableSize;
-        this.refreshRate = refreshRate;
-        this.screenType = screenType;
-        this.screenQuality = screenQuality;
-        this.smartTv = smartTv;
-        this.wifi = wifi;
-        this.voiceControl = voiceControl;
-        this.hdr = hdr;
-        this.bluetooth = bluetooth;
-        this.ambiLight = ambiLight;
-        this.originalStock = originalStock;
-        this.sold = sold;
-    }
 
     public long getId() {
         return id;

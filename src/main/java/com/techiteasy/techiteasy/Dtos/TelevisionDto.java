@@ -1,12 +1,10 @@
 package com.techiteasy.techiteasy.Dtos;
 
-import com.sun.istack.NotNull;
 import com.techiteasy.techiteasy.model.Television;
-
-import javax.validation.constraints.Size;
 
 public class TelevisionDto {
 
+    public Long id;
     public String type;
     public String brand;
     public String name;
@@ -28,6 +26,7 @@ public class TelevisionDto {
 
         var dto = new TelevisionDto();
 
+        dto.id = television.getId();
         dto.type = television.getType();
         dto.brand = television.getBrand();
         dto.name = television.getName();
@@ -47,5 +46,4 @@ public class TelevisionDto {
 
         return dto;
     }
-
 }

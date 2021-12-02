@@ -1,5 +1,6 @@
 package com.techiteasy.techiteasy.controllers;
 
+import com.techiteasy.techiteasy.Dtos.IdInputDto;
 import com.techiteasy.techiteasy.Dtos.TelevisionDto;
 import com.techiteasy.techiteasy.Dtos.TelevisionInputDto;
 import com.techiteasy.techiteasy.model.Television;
@@ -13,9 +14,9 @@ import java.util.List;
 @RestController
 public class TelevisionController {
 
+   @Autowired
    private TelevisionService televisionService;
 
-   @Autowired
    public TelevisionController(TelevisionService televisionService) {
       this.televisionService = televisionService;
    }
@@ -52,6 +53,15 @@ public class TelevisionController {
    @PutMapping("televisions/{id}")
    public TelevisionDto updateTelevision(@PathVariable("id") Long id, @RequestBody Television television) {
       televisionService.updateTelevision(id, television);
+      return TelevisionDto.fromTelevision(television);
+   }
+
+   @PutMapping("televisions/{id}/remotecontroller")
+   public TelevisionDto updateTelevisionRemoteController(@PathVariable("id") Long id, @RequestBody IdInputDto remote_id) {
+      televisionService.assignRemoteControllerToTelevision(id, remote_id);
+
+      var television = televisionService.getTelevision(id);
+
       return TelevisionDto.fromTelevision(television);
    }
 

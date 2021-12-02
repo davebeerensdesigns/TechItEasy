@@ -1,5 +1,7 @@
 package com.techiteasy.techiteasy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,10 @@ public class RemoteController {
     private String brand;
     private Double price;
     private Integer originalStock;
+
+    @OneToOne(mappedBy = "remoteController")
+    @JsonIgnore
+    private Television television;
 
     public long getId() {
         return id;
@@ -71,5 +77,13 @@ public class RemoteController {
 
     public void setOriginalStock(Integer originalStock) {
         this.originalStock = originalStock;
+    }
+
+    public Television getTelevision() {
+        return television;
+    }
+
+    public void setTelevision(Television television) {
+        this.television = television;
     }
 }

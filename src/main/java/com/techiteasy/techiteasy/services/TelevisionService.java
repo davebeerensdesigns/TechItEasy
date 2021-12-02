@@ -1,8 +1,11 @@
 package com.techiteasy.techiteasy.services;
 
+import com.techiteasy.techiteasy.Dtos.IdInputDto;
 import com.techiteasy.techiteasy.Dtos.TelevisionDto;
 import com.techiteasy.techiteasy.exceptions.RecordNotFoundException;
+import com.techiteasy.techiteasy.model.RemoteController;
 import com.techiteasy.techiteasy.model.Television;
+import com.techiteasy.techiteasy.repository.RemoteControllerRepository;
 import com.techiteasy.techiteasy.repository.TelevisionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +19,12 @@ public class TelevisionService {
 
     private TelevisionRepository televisionRepository;
 
+    private RemoteControllerRepository remoteControllerRepository;
+
     @Autowired
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService(TelevisionRepository televisionRepository, RemoteControllerRepository remoteControllerRepository) {
         this.televisionRepository = televisionRepository;
+        this.remoteControllerRepository = remoteControllerRepository;
     }
 
     public List<TelevisionDto> getTelevisions(){
@@ -76,4 +82,16 @@ public class TelevisionService {
         televisionRepository.save(existingTelevision);
     }
 
+    public void assignRemoteControllerToTelevision(long id, IdInputDto remote_id){
+        if (!televisionRepository.existsById(id)) {
+            throw new RecordNotFoundException("ID does not exist!");
+        }
+        if (!remoteControllerRepository.existsById(remote_id.id)) {
+            throw new RecordNotFoundException("ID does not exist!");
+        }
+        Television television = televisionRepository.findById(id).orElse(null);
+        RemoteController remoteController = remoteControllerRepository.findById(remote_id.id).orElse(null);
+        television.setRemoteController(remoteController);
+        televisionRepository.save(television);
+    }
 }

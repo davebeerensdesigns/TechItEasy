@@ -21,25 +21,18 @@ public class WallBracketService {
         this.wallbracketRepository = wallbracketRepository;
     }
 
-    public List<WallBracketDto> getWallBrackets(){
-        var dtos = new ArrayList<WallBracketDto>();
-        var wallbrackets = wallbracketRepository.findAll();
-
-        for (WallBracket wallbracket : wallbrackets) {
-            dtos.add(WallBracketDto.fromWallBracket(wallbracket));
-        }
-
-        return dtos;
+    public List<WallBracket> getWallBrackets(){
+        return wallbracketRepository.findAll();
     }
 
     public WallBracket getWallBracket(long id){
-        Optional<WallBracket> optionalWallBracket = wallbracketRepository.findById(id);
+        Optional<WallBracket> wallBracket = wallbracketRepository.findById(id);
 
-        if(optionalWallBracket.isPresent()){
-            return optionalWallBracket.get();
+        if(wallBracket.isPresent()){
+            return wallBracket.get();
         } else{
             // exception
-            throw new RecordNotFoundException("ID does not exist!");
+            throw new RecordNotFoundException("No wallbracket found!");
         }
     }
 
@@ -51,16 +44,17 @@ public class WallBracketService {
         wallbracketRepository.deleteById(id);
     }
 
-    public void updateWallBracket(long id, WallBracket wallbracket){
+    public void updateWallBracket(long id, WallBracket wallBracket){
         if (!wallbracketRepository.existsById(id)) {
-            throw new RecordNotFoundException("ID does not exist!");
+            throw new RecordNotFoundException("No wallbracket found!");
         }
         WallBracket existingWallBracket = wallbracketRepository.findById(id).orElse(null);
 
-        existingWallBracket.setSize(wallbracket.getSize());
-        existingWallBracket.setAdjustable(wallbracket.getAdjustable());
-        existingWallBracket.setName(wallbracket.getName());
-        existingWallBracket.setPrice(wallbracket.getPrice());
+        existingWallBracket.setId(wallBracket.getId());
+        existingWallBracket.setSize(wallBracket.getSize());
+        existingWallBracket.setAdjustable(wallBracket.getAdjustable());
+        existingWallBracket.setName(wallBracket.getName());
+        existingWallBracket.setPrice(wallBracket.getPrice());
 
         wallbracketRepository.save(existingWallBracket);
     }

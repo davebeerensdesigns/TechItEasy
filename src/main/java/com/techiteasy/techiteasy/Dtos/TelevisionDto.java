@@ -1,7 +1,6 @@
 package com.techiteasy.techiteasy.Dtos;
 
-import com.techiteasy.techiteasy.model.RemoteController;
-import com.techiteasy.techiteasy.model.Television;
+import com.techiteasy.techiteasy.model.*;
 
 public class TelevisionDto {
 
@@ -23,6 +22,7 @@ public class TelevisionDto {
     public Integer originalStock;
     public Integer sold;
     public RemoteController remoteControllerId;
+    public CiModule ciModuleId;
 
     public static TelevisionDto fromTelevision(Television television){
 
@@ -46,6 +46,7 @@ public class TelevisionDto {
         dto.originalStock = television.getOriginalStock();
         dto.sold = television.getSold();
         dto.remoteControllerId = television.getRemoteController();
+        dto.ciModuleId = television.getCiModule();
 
         return dto;
     }

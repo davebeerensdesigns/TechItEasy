@@ -11,13 +11,13 @@ public class WallBracketInputDto {
 
     public WallBracket toWallBracket() {
 
-        var wallbracket = new WallBracket();
+        var wallBracket = new WallBracket();
 
-        wallbracket.setSize(size);
-        wallbracket.setAdjustable(adjustable);
-        wallbracket.setName(name);
-        wallbracket.setPrice(price);
+        wallBracket.setSize(size);
+        wallBracket.setAdjustable(adjustable);
+        wallBracket.setName(name);
+        wallBracket.setPrice(price);
 
-        return wallbracket;
+        return wallBracket;
     }
 }

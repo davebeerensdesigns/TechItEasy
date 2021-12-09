@@ -5,13 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "remoteControllers")
+@Table(name = "remote_controller")
 public class RemoteController {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String compatibleWith;
     private String batteryType;
     private String name;

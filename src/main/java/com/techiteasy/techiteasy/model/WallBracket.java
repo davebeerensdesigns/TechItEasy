@@ -1,19 +1,25 @@
 package com.techiteasy.techiteasy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "wallBrackets")
+@Table(name = "wallbracket")
 public class WallBracket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String size;
     private Boolean adjustable;
     private String name;
     private Double price;
+
+    @OneToMany(mappedBy = "television")
+    @JsonIgnore
+    List<TelevisionWallbracket> televisionWallbrackets;
 
     public long getId() {
         return id;
@@ -53,5 +59,12 @@ public class WallBracket {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public List<TelevisionWallbracket> getTelevisionWallbrackets() {
+        return televisionWallbrackets;
+    }
+    public void setTelevisionWallbrackets(List<TelevisionWallbracket> televisionWallbrackets) {
+        this.televisionWallbrackets = televisionWallbrackets;
     }
 }

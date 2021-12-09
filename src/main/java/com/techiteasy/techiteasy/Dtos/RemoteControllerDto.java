@@ -12,17 +12,17 @@ public class RemoteControllerDto {
     public Double price;
     public Integer originalStock;
 
-    public static RemoteControllerDto fromRemoteController(RemoteController remotecontroller){
+    public static RemoteControllerDto fromRemoteController(RemoteController remoteController){
 
         var dto = new RemoteControllerDto();
 
-        dto.id = remotecontroller.getId();
-        dto.compatibleWith = remotecontroller.getCompatibleWith();
-        dto.batteryType = remotecontroller.getBatteryType();
-        dto.name = remotecontroller.getName();
-        dto.brand = remotecontroller.getBrand();
-        dto.price = remotecontroller.getPrice();
-        dto.originalStock = remotecontroller.getOriginalStock();
+        dto.id = remoteController.getId();
+        dto.compatibleWith = remoteController.getCompatibleWith();
+        dto.batteryType = remoteController.getBatteryType();
+        dto.name = remoteController.getName();
+        dto.brand = remoteController.getBrand();
+        dto.price = remoteController.getPrice();
+        dto.originalStock = remoteController.getOriginalStock();
 
         return dto;
     }

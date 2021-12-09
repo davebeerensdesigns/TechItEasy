@@ -6,17 +6,16 @@ public class CiModuleInputDto {
 
     public String type;
     public String name;
-
     public Double price;
 
     public CiModule toCiModule() {
 
-        var cimodule = new CiModule();
+        var ciModule = new CiModule();
 
-        cimodule.setType(type);
-        cimodule.setName(name);
-        cimodule.setPrice(price);
+        ciModule.setType(type);
+        ciModule.setName(name);
+        ciModule.setPrice(price);
 
-        return cimodule;
+        return ciModule;
     }
 }

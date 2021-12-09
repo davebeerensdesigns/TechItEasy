@@ -3,29 +3,52 @@ package com.techiteasy.techiteasy.controllers;
 import com.techiteasy.techiteasy.Dtos.IdInputDto;
 import com.techiteasy.techiteasy.Dtos.TelevisionDto;
 import com.techiteasy.techiteasy.Dtos.TelevisionInputDto;
+import com.techiteasy.techiteasy.exceptions.BadRequestException;
 import com.techiteasy.techiteasy.model.Television;
+import com.techiteasy.techiteasy.model.WallBracket;
 import com.techiteasy.techiteasy.services.TelevisionService;
+import com.techiteasy.techiteasy.services.TelevisionWallBracketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
 @RestController
 public class TelevisionController {
 
-   @Autowired
    private TelevisionService televisionService;
+   private TelevisionWallBracketService televisionWallBracketService;
 
-   public TelevisionController(TelevisionService televisionService) {
+   @Autowired
+   public TelevisionController(TelevisionService televisionService, TelevisionWallBracketService televisionWallBracketService) {
       this.televisionService = televisionService;
+      this.televisionWallBracketService = televisionWallBracketService;
    }
 
 
    @GetMapping("/televisions")
-   public List<TelevisionDto> getTelevisions() {
+   public List<TelevisionDto> getTelevisions(@RequestParam(value = "brand", required = false) String brand) {
 
-      return televisionService.getTelevisions();
+      var dtos = new ArrayList<TelevisionDto>();
+
+      List<Television> televisions;
+
+      if(brand != null ){
+         televisions = televisionService.getTelevisionsByBrand(brand);
+      } else if (brand == null) {
+         televisions = televisionService.getTelevisions();
+      } else {
+         throw new BadRequestException();
+      }
+
+      for (Television television : televisions){
+         dtos.add(TelevisionDto.fromTelevision(television));
+      }
+
+      return dtos;
 
    }
 
@@ -57,12 +80,18 @@ public class TelevisionController {
    }
 
    @PutMapping("televisions/{id}/remotecontroller")
-   public TelevisionDto updateTelevisionRemoteController(@PathVariable("id") Long id, @RequestBody IdInputDto remote_id) {
-      televisionService.assignRemoteControllerToTelevision(id, remote_id);
+   public void assignRemoteControllerToTelevision(@PathVariable("id") Long id, @RequestBody IdInputDto input) {
+      televisionService.assignRemoteControllerToTelevision(id, input.id);
+   }
 
-      var television = televisionService.getTelevision(id);
+   @PutMapping("televisions/{id}/{ciModuleId}")
+   public void assignCIModuleToTelevision(@PathVariable("id") Long id, @PathVariable("ciModuleId") Long ciModuleId) {
+      televisionService.assignCIModuleToTelevision(id, ciModuleId);
+   }
 
-      return TelevisionDto.fromTelevision(television);
+   @GetMapping("/televisions/wallbrackets/{televisionId}")
+   public Collection<WallBracket> getWallBracketsByTelevisionId(@PathVariable("televisionId") Long televisionId){
+      return televisionWallBracketService.getTelevisionWallBracketByTelevisionId(televisionId);
    }
 
 

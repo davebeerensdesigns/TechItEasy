@@ -10,15 +10,15 @@ public class WallBracketDto {
     public String name;
     public Double price;
 
-    public static WallBracketDto fromWallBracket(WallBracket wallbracket) {
+    public static WallBracketDto fromWallBracket(WallBracket wallBracket) {
 
         var dto = new WallBracketDto();
 
-        dto.id = wallbracket.getId();
-        dto.size = wallbracket.getSize();
-        dto.adjustable = wallbracket.getAdjustable();
-        dto.name = wallbracket.getName();
-        dto.price = wallbracket.getPrice();
+        dto.id = wallBracket.getId();
+        dto.size = wallBracket.getSize();
+        dto.adjustable = wallBracket.getAdjustable();
+        dto.name = wallBracket.getName();
+        dto.price = wallBracket.getPrice();
 
         return dto;
     }

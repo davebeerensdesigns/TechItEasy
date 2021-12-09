@@ -13,15 +13,15 @@ public class RemoteControllerInputDto {
 
     public RemoteController toRemoteController() {
 
-        var remotecontroller = new RemoteController();
+        var remoteController = new RemoteController();
 
-        remotecontroller.setCompatibleWith(compatibleWith);
-        remotecontroller.setBatteryType(batteryType);
-        remotecontroller.setName(name);
-        remotecontroller.setBrand(brand);
-        remotecontroller.setPrice(price);
-        remotecontroller.setOriginalStock(originalStock);
+        remoteController.setCompatibleWith(compatibleWith);
+        remoteController.setBatteryType(batteryType);
+        remoteController.setName(name);
+        remoteController.setBrand(brand);
+        remoteController.setPrice(price);
+        remoteController.setOriginalStock(originalStock);
 
-        return remotecontroller;
+        return remoteController;
     }
 }

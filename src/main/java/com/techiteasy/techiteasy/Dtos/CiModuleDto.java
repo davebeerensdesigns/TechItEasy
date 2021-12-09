@@ -9,14 +9,14 @@ public class CiModuleDto {
     public String name;
     public Double price;
 
-    public static CiModuleDto fromCiModule(CiModule cimodule){
+    public static CiModuleDto fromCiModule(CiModule ciModule){
 
         var dto = new CiModuleDto();
 
-        dto.id = cimodule.getId();
-        dto.type = cimodule.getType();
-        dto.name = cimodule.getName();
-        dto.price = cimodule.getPrice();
+        dto.id = ciModule.getId();
+        dto.type = ciModule.getType();
+        dto.name = ciModule.getName();
+        dto.price = ciModule.getPrice();
 
         return dto;
     }

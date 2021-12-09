@@ -21,7 +21,7 @@ public class WallBracketController {
 
 
     @GetMapping("/wallbrackets")
-    public List<WallBracketDto> getWallBrackets() {
+    public List<WallBracket> getWallBrackets() {
 
         return wallbracketService.getWallBrackets();
 

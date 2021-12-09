@@ -1,13 +1,11 @@
 package com.techiteasy.techiteasy.services;
 
-import com.techiteasy.techiteasy.Dtos.RemoteControllerDto;
 import com.techiteasy.techiteasy.exceptions.RecordNotFoundException;
 import com.techiteasy.techiteasy.model.RemoteController;
 import com.techiteasy.techiteasy.repository.RemoteControllerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,25 +19,18 @@ public class RemoteControllerService {
         this.remotecontrollerRepository = remotecontrollerRepository;
     }
 
-    public List<RemoteControllerDto> getRemoteControllers(){
-        var dtos = new ArrayList<RemoteControllerDto>();
-        var remotecontrollers = remotecontrollerRepository.findAll();
-
-        for (RemoteController remotecontroller : remotecontrollers) {
-            dtos.add(RemoteControllerDto.fromRemoteController(remotecontroller));
-        }
-
-        return dtos;
+    public List<RemoteController> getRemoteControllers(){
+        return remotecontrollerRepository.findAll();
     }
 
     public RemoteController getRemoteController(long id){
-        Optional<RemoteController> optionalRemoteController = remotecontrollerRepository.findById(id);
+        Optional<RemoteController> remoteController = remotecontrollerRepository.findById(id);
 
-        if(optionalRemoteController.isPresent()){
-            return optionalRemoteController.get();
+        if(remoteController.isPresent()){
+            return remoteController.get();
         } else{
             // exception
-            throw new RecordNotFoundException("ID does not exist!");
+            throw new RecordNotFoundException("No remotecontroller found");
         }
     }
 
@@ -53,18 +44,19 @@ public class RemoteControllerService {
 
     public void updateRemoteController(long id, RemoteController remotecontroller){
         if (!remotecontrollerRepository.existsById(id)) {
-            throw new RecordNotFoundException("ID does not exist!");
+            throw new RecordNotFoundException("No remotecontroller found");
         }
-        RemoteController existingRemoteController = remotecontrollerRepository.findById(id).orElse(null);
+        RemoteController storedRemoteController = remotecontrollerRepository.findById(id).orElse(null);
 
-        existingRemoteController.setCompatibleWith(remotecontroller.getCompatibleWith());
-        existingRemoteController.setBatteryType(remotecontroller.getBatteryType());
-        existingRemoteController.setName(remotecontroller.getName());
-        existingRemoteController.setBrand(remotecontroller.getBrand());
-        existingRemoteController.setPrice(remotecontroller.getPrice());
-        existingRemoteController.setOriginalStock(remotecontroller.getOriginalStock());
+        storedRemoteController.setId(remotecontroller.getId());
+        storedRemoteController.setCompatibleWith(remotecontroller.getCompatibleWith());
+        storedRemoteController.setBatteryType(remotecontroller.getBatteryType());
+        storedRemoteController.setName(remotecontroller.getName());
+        storedRemoteController.setPrice(remotecontroller.getPrice());
+        storedRemoteController.setBrand(remotecontroller.getBrand());
+        storedRemoteController.setOriginalStock(remotecontroller.getOriginalStock());
 
-        remotecontrollerRepository.save(existingRemoteController);
+        remotecontrollerRepository.save(storedRemoteController);
     }
 
 }

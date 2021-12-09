@@ -1,19 +1,21 @@
 package com.techiteasy.techiteasy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "televisions")
+@Table(name = "television")
 public class Television {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String type;
     private String brand;
     private String name;
@@ -32,8 +34,58 @@ public class Television {
     private Integer sold;
 
     @OneToOne
-    @JsonIgnore
     private RemoteController remoteController;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ci_module_id")
+    private CiModule ciModule;
+
+    @OneToMany(mappedBy = "television")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    Collection<TelevisionWallbracket> televisionWallbrackets;
+
+
+    // Een default constructor
+    public Television() {}
+
+    // Een constructor met alle gevraagde variable
+    public Television(
+            Long id,
+            String type,
+            String brand,
+            String name,
+            Double price,
+            Double availableSize,
+            Double refreshRate,
+            String screenType,
+            String screenQuality,
+            Boolean smartTv,
+            Boolean wifi,
+            Boolean voiceControl,
+            Boolean hdr,
+            Boolean bleutooth,
+            Boolean ambiLight,
+            Integer originalStock,
+            Integer sold ) {
+        this.id = id;
+        this.type = type;
+        this.brand = brand;
+        this.name = name;
+        this.price = price;
+        this.availableSize = availableSize;
+        this.refreshRate = refreshRate;
+        this.screenType = screenType;
+        this.screenQuality = screenQuality;
+        this.smartTv = smartTv;
+        this.wifi = wifi;
+        this.voiceControl = voiceControl;
+        this.hdr = hdr;
+        this.bluetooth = bleutooth;
+        this.ambiLight = ambiLight;
+        this.originalStock = originalStock;
+        this.sold = sold;
+    }
 
     public long getId() {
         return id;
@@ -177,5 +229,21 @@ public class Television {
 
     public void setRemoteController(RemoteController remoteController) {
         this.remoteController = remoteController;
+    }
+
+    public CiModule getCiModule() {
+        return ciModule;
+    }
+
+    public void setCiModule(CiModule ciModule) {
+        this.ciModule = ciModule;
+    }
+
+    public Collection<TelevisionWallbracket> getTelevisionWallbrackets() {
+        return televisionWallbrackets;
+    }
+
+    public void setTelevisionWallbrackets(Collection<TelevisionWallbracket> televisionWallbrackets) {
+        this.televisionWallbrackets = televisionWallbrackets;
     }
 }

@@ -1,3 +1,14 @@
+INSERT INTO users (username, password, enabled, email)
+VALUES
+('user', '$2a$10$ONkcLsaonPAoaIEGNwRKVu/um3/IQOchYrbjNXIiR6xMMvjhf.WGK', TRUE, 'dummy@novi.nl'),
+('admin', '$2a$10$ONkcLsaonPAoaIEGNwRKVu/um3/IQOchYrbjNXIiR6xMMvjhf.WGK', TRUE, 'dummy@novi.nl');
+
+INSERT INTO authorities (username, authority)
+VALUES
+('user', 'ROLE_USER'),
+('admin', 'ROLE_USER'),
+('admin', 'ROLE_ADMIN');
+
 INSERT INTO wallbracket (id, size, adjustable, name, price)
 VALUES
 (1, '25X32', false, 'LG bracket', 32.23),
